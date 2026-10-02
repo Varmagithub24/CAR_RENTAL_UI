@@ -22,6 +22,8 @@ export class RegisterComponent {
   protected readonly errorMessage = signal<string | null>(null);
   protected readonly successMessage = signal<string | null>(null);
   protected readonly form = this.formBuilder.nonNullable.group({
+    firstName: ['', [Validators.required, Validators.maxLength(100)]],
+    lastName: ['', [Validators.required, Validators.maxLength(100)]],
     email: ['', [Validators.required, Validators.email, Validators.minLength(6), Validators.maxLength(254)]],
     password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(128)]],
     confirmPassword: ['', [Validators.required]],
@@ -30,7 +32,7 @@ export class RegisterComponent {
   submit(): void {
     this.form.markAllAsTouched();
     if (this.form.invalid || this.busy()) return;
-    const { email, password, confirmPassword } = this.form.getRawValue();
+    const { email, password, confirmPassword, firstName, lastName } = this.form.getRawValue();
     if (password !== confirmPassword) {
       this.form.controls.confirmPassword.setErrors({ mismatch: true });
       return;
@@ -38,12 +40,15 @@ export class RegisterComponent {
 
     this.busy.set(true);
     this.errorMessage.set(null);
-    this.auth.register({ email, password }).subscribe({
+    this.auth.register({ email, password, firstName, lastName }).subscribe({
       next: () => {
-        this.successMessage.set('Your account is ready. Sign in to continue.');
+        this.successMessage.set('Check your email to verify your account before signing in.');
         this.form.reset();
       },
-      error: (error: unknown) => this.errorMessage.set(this.errors.message(error)),
+      error: (error: unknown) => {
+        this.errorMessage.set(this.errors.message(error));
+        this.busy.set(false);
+      },
       complete: () => this.busy.set(false),
     });
   }

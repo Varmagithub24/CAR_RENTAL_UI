@@ -35,6 +35,14 @@ export class AuthService {
     return this.http.post<RegisteredUser>(`${environment.apiUrl}/auth/register`, details);
   }
 
+  requestVerification(email: string): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(`${environment.apiUrl}/auth/email-verification/request`, { email });
+  }
+
+  confirmVerification(details: { token: string; firstName: string; lastName: string }): Observable<void> {
+    return this.http.post<void>(`${environment.apiUrl}/auth/email-verification/confirm`, details);
+  }
+
   refreshSession(): Observable<string | null> {
     if (this.refreshRequest) return this.refreshRequest;
     const refreshToken = this.session()?.refreshToken;

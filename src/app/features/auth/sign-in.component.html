@@ -19,6 +19,7 @@
         <button class="primary-button" type="submit" [disabled]="busy()">{{ busy() ? 'Signing in…' : 'Sign in' }} <span aria-hidden="true">→</span></button>
       </form>
       <p class="auth-switch">New to Wayfarer? <a routerLink="/register">Create an account</a></p>
+      <p class="auth-switch"><a routerLink="/verify-email">Verify your email</a></p>
       <p class="auth-footnote">Your access stays private and is cleared when you sign out.</p>
     </div>
   </section>

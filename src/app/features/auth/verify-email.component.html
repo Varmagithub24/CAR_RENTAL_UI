@@ -1,0 +1,34 @@
+<main class="auth-layout">
+  <section class="auth-visual register-visual" aria-label="A car ready for a journey">
+    <a class="auth-brand" routerLink="/sign-in"><span class="brand-mark">W</span> wayfarer<span>.</span></a>
+  </section>
+  <section class="auth-panel">
+    <div class="auth-content">
+      <h1>Verify your email</h1>
+      <app-feedback-message [message]="errorMessage()" />
+      <app-feedback-message [message]="successMessage()" variant="success" />
+      @if (confirmed()) {
+        <p class="auth-switch"><a routerLink="/sign-in">Continue to sign in</a></p>
+      } @else if (hasToken()) {
+        <form [formGroup]="profile" (ngSubmit)="confirm()" novalidate>
+          <label for="verify-first-name">First name</label>
+          <input id="verify-first-name" formControlName="firstName" autocomplete="given-name" maxlength="100" />
+          @if (profile.controls.firstName.invalid && profile.controls.firstName.touched) { <small>Enter your first name.</small> }
+          <label for="verify-last-name">Last name</label>
+          <input id="verify-last-name" formControlName="lastName" autocomplete="family-name" maxlength="100" />
+          @if (profile.controls.lastName.invalid && profile.controls.lastName.touched) { <small>Enter your last name.</small> }
+          <button class="primary-button" type="submit" [disabled]="busy()">{{ busy() ? 'Verifying...' : 'Verify email' }}</button>
+        </form>
+        <button class="primary-button" type="button" [disabled]="busy()" (click)="requestNewLink()">Request a new link</button>
+      } @else {
+        <form [formGroup]="request" (ngSubmit)="resend()" novalidate>
+          <label for="verification-email">Email address</label>
+          <input id="verification-email" type="email" formControlName="email" autocomplete="email" inputmode="email" />
+          @if (request.controls.email.invalid && request.controls.email.touched) { <small>Enter a valid email address.</small> }
+          <button class="primary-button" type="submit" [disabled]="busy()">{{ busy() ? 'Sending...' : 'Send verification email' }}</button>
+        </form>
+      }
+      <p class="auth-switch"><a routerLink="/sign-in">Back to sign in</a></p>
+    </div>
+  </section>
+</main>

@@ -6,6 +6,7 @@ export const routes: Routes = [
 	{ path: '', pathMatch: 'full', redirectTo: 'dashboard' },
 	{ path: 'sign-in', loadComponent: () => import('./features/auth/sign-in.component').then((module) => module.SignInComponent) },
 	{ path: 'register', loadComponent: () => import('./features/auth/register.component').then((module) => module.RegisterComponent) },
+	{ path: 'verify-email', loadComponent: () => import('./features/auth/verify-email.component').then((module) => module.VerifyEmailComponent) },
 	{
 		path: 'forbidden',
 		loadComponent: () => import('./features/system/system-page.component').then((module) => module.SystemPageComponent),
