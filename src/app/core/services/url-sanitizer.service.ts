@@ -4,6 +4,7 @@ const applicationPaths = new Set([
   '/',
   '/sign-in',
   '/register',
+  '/verify-email',
   '/dashboard',
   '/explore',
   '/profile',
@@ -38,7 +39,13 @@ export class UrlSanitizerService {
     }
 
     const search = safeQuery.size ? `?${safeQuery.toString()}` : '';
-    const safeUrl = `${pathname === '/' ? '/dashboard' : pathname}${search}`;
+    const verificationToken = pathname === '/verify-email'
+      ? new URLSearchParams(url.hash.slice(1)).get('token')
+      : null;
+    const fragment = verificationToken && /^[A-Za-z0-9_-]{43}$/.test(verificationToken)
+      ? `#token=${verificationToken}`
+      : '';
+    const safeUrl = `${pathname === '/' ? '/dashboard' : pathname}${search}${fragment}`;
     const currentUrl = `${url.pathname}${url.search}${url.hash}`;
     if (currentUrl !== safeUrl) {
       window.history.replaceState(window.history.state, document.title, safeUrl);

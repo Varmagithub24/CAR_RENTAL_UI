@@ -43,4 +43,24 @@ describe('UrlSanitizerService', () => {
     expect(window.location.pathname).toBe('/explore');
     expect(window.location.search).toBe('');
   });
+
+  it('allows the verification page and preserves only its valid verification token', () => {
+    const token = 'A'.repeat(43);
+    window.history.replaceState({}, '', `/verify-email?accessToken=secret#token=${token}&refresh_token=secret`);
+
+    sanitizer.sanitizeInitialUrl();
+
+    expect(window.location.pathname).toBe('/verify-email');
+    expect(window.location.search).toBe('');
+    expect(window.location.hash).toBe(`#token=${token}`);
+  });
+
+  it('keeps the verification route but removes a malformed token', () => {
+    window.history.replaceState({}, '', '/verify-email#token=invalid');
+
+    sanitizer.sanitizeInitialUrl();
+
+    expect(window.location.pathname).toBe('/verify-email');
+    expect(window.location.hash).toBe('');
+  });
 });
