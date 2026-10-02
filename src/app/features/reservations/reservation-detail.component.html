@@ -1,0 +1,20 @@
+<section class="reservation-page">
+  <a class="back-link" routerLink="/explore"><span aria-hidden="true">←</span> Back to search</a>
+  @if (booking(); as reservation) {
+    <div class="reservation-head"><div><div class="eyebrow">YOUR RESERVATION</div><h1>Trip details.</h1></div><span class="status-badge" [class.confirmed]="reservation.status === 'CONFIRMED'">{{ reservation.status }}</span></div>
+    <app-feedback-message [message]="errorMessage()" />
+    <app-feedback-message [message]="notice()" variant="success" />
+    <article class="trip-sheet">
+      <div class="trip-sheet-top"><span>WAYFARER RENTALS</span><span>YOUR CURRENT TRIP</span></div>
+      <div class="trip-car"><span class="car-mark" aria-hidden="true">✳</span><div><span class="small-label">YOUR RIDE</span><h2>Your reserved car</h2></div></div>
+      <div class="trip-dates"><div><span class="small-label">PICK-UP</span><strong>{{ reservation.pickupDateTime | date:'medium' }}</strong></div><span class="route-line" aria-hidden="true">······→</span><div><span class="small-label">RETURN</span><strong>{{ reservation.returnDateTime | date:'medium' }}</strong></div></div>
+      <div class="trip-actions">
+        @if (reservation.status === 'PENDING') { <button class="confirm-button" type="button" (click)="confirm()" [disabled]="busy()">{{ busy() ? 'Updating…' : 'Confirm reservation' }} <span aria-hidden="true">→</span></button> }
+        @if (reservation.status !== 'CANCELLED') { <button class="cancel-button" type="button" (click)="cancel()" [disabled]="busy()">Cancel trip</button> }
+        @if (reservation.status === 'CANCELLED') { <p class="cancelled-copy">This reservation is cancelled.</p> }
+      </div>
+    </article>
+  } @else {
+    <div class="unavailable-state"><div class="eyebrow">RESERVATION NOT AVAILABLE</div><h1>We can't show this trip.</h1><p>Reservation details are available only in the session where the trip was created. Return to search to start a new reservation.</p><a class="confirm-button" routerLink="/explore">Search for a car <span aria-hidden="true">→</span></a></div>
+  }
+</section>

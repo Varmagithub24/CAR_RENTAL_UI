@@ -1,0 +1,26 @@
+<section class="dashboard-page">
+  <div class="welcome-row">
+    <div><div class="eyebrow">YOUR WAYFARER SPACE</div><h1>Good to see you, {{ firstName }}.</h1></div>
+    <a class="text-link" routerLink="/profile">Account settings <span aria-hidden="true">↗</span></a>
+  </div>
+  <app-feedback-message [message]="errorMessage()" />
+
+  <section class="journey-hero">
+    <div class="hero-copy">
+      <span class="hero-kicker">A LITTLE MORE OPEN ROAD</span>
+      <h2>Take the<br />long way.</h2>
+      <p>Find a car that fits the trip, then make the day your own.</p>
+      <a class="hero-button" routerLink="/explore">Find your car <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="hero-image" role="img" aria-label="A silver sports car ready for the road"></div>
+    <div class="hero-index"><span>01</span> / FIND A RIDE</div>
+  </section>
+
+  <div class="section-heading"><div><div class="eyebrow">MADE FOR THE MOMENT</div><h2>Your next trip, made simple.</h2></div></div>
+  <div class="action-grid">
+    <a class="action-tile" routerLink="/explore"><span class="tile-number">01</span><span class="tile-mark" aria-hidden="true">⌕</span><h3>Find availability</h3><p>Search dates and pickup locations to see what's ready.</p><span class="tile-arrow" aria-hidden="true">↗</span></a>
+    <a class="action-tile clay-tile" routerLink="/profile"><span class="tile-number">02</span><span class="tile-mark" aria-hidden="true">◉</span><h3>Get trip-ready</h3><p>Keep your contact details, address and licence status up to date.</p><span class="tile-arrow" aria-hidden="true">↗</span></a>
+  </div>
+
+  <div class="dashboard-note"><span class="note-symbol" aria-hidden="true">✳</span><div><strong>Good journeys begin with the details.</strong><p>Check your profile before you book, so your next pickup goes smoothly.</p></div><a routerLink="/profile">Review profile <span aria-hidden="true">→</span></a></div>
+</section>

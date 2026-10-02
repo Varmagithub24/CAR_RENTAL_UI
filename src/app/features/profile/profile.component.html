@@ -1,0 +1,56 @@
+<section class="profile-page">
+  <header class="page-heading"><div><div class="eyebrow">YOUR DETAILS, ALL IN ONE PLACE</div><h1>Your profile.</h1><p>Keep the essentials current before your next pickup.</p></div><span class="profile-seal" aria-hidden="true">W</span></header>
+  <section class="profile-section">
+    <div class="section-intro"><span class="section-count">01</span><div><h2>Personal details</h2><p>Contact information for your trips.</p></div></div>
+    <div class="section-body">
+      <app-feedback-message [message]="profileError()" />
+      <app-feedback-message [message]="profileNotice()" variant="success" />
+      <form [formGroup]="profileForm" (ngSubmit)="saveProfile()" class="form-grid" novalidate>
+        <label>First name<input formControlName="firstName" autocomplete="given-name" />@if (profileForm.controls.firstName.invalid && profileForm.controls.firstName.touched) { <small>First name is required.</small> }</label>
+        <label>Last name<input formControlName="lastName" autocomplete="family-name" />@if (profileForm.controls.lastName.invalid && profileForm.controls.lastName.touched) { <small>Last name is required.</small> }</label>
+        <label>Email address<input type="email" formControlName="email" autocomplete="email" />@if (profileForm.controls.email.invalid && profileForm.controls.email.touched) { <small>Enter a valid email address.</small> }</label>
+        <label>Phone number<input type="tel" formControlName="phone" autocomplete="tel" /></label>
+        <label>Preferred language<select formControlName="preferredLanguage"><option value="en">English</option><option value="hi">Hindi</option><option value="fr">French</option></select></label>
+        <div class="form-action"><button class="button-primary" type="submit" [disabled]="profileBusy()">{{ profileBusy() ? 'Saving…' : 'Save details' }} <span aria-hidden="true">→</span></button></div>
+      </form>
+    </div>
+  </section>
+  <section class="profile-section">
+    <div class="section-intro"><span class="section-count">02</span><div><h2>Pickup addresses</h2><p>Save a place you use often.</p></div></div>
+    <div class="section-body">
+      <app-feedback-message [message]="addressError()" />
+      <app-feedback-message [message]="addressNotice()" variant="success" />
+      @if (addresses().length) {
+        <div class="address-list">@for (address of addresses(); track address.addressId) { <div class="address-line"><span class="address-icon" aria-hidden="true">⌖</span><div><strong>{{ address.label }}</strong><p>{{ address.line1 }}{{ address.line2 ? ', ' + address.line2 : '' }}, {{ address.city }}, {{ address.country }}</p></div>@if (address.isPrimary) { <span class="primary-tag">PRIMARY</span> }</div> }</div>
+      } @else { <p class="quiet-empty">No saved addresses yet.</p> }
+      <form [formGroup]="addressForm" (ngSubmit)="addAddress()" class="form-grid address-form" novalidate>
+        <label>Label<input formControlName="label" placeholder="Home, work…" /></label>
+        <label>Address line 1<input formControlName="line1" autocomplete="address-line1" /></label>
+        <label>Address line 2<input formControlName="line2" autocomplete="address-line2" /></label>
+        <label>City<input formControlName="city" autocomplete="address-level2" /></label>
+        <label>State / region<input formControlName="state" autocomplete="address-level1" /></label>
+        <label>Postal code<input formControlName="postalCode" autocomplete="postal-code" /></label>
+        <label>Country<input formControlName="country" autocomplete="country-name" /></label>
+        <label class="check-label"><input type="checkbox" formControlName="isPrimary" /> Set as primary address</label>
+        <div class="form-action"><button class="button-secondary" type="submit" [disabled]="addressBusy()">{{ addressBusy() ? 'Adding…' : 'Add address' }} <span aria-hidden="true">+</span></button></div>
+      </form>
+    </div>
+  </section>
+  <section class="profile-section kyc-section">
+    <div class="section-intro"><span class="section-count">03</span><div><h2>Driving licence</h2><p>Share your details for verification.</p></div></div>
+    <div class="section-body">
+      <div class="kyc-status"><div><span class="status-label">CURRENT STATUS</span><strong>{{ kyc()?.status || 'Not submitted' }}</strong></div><span class="status-dot" [class.status-pending]="kyc()?.status === 'pending'"></span></div>
+      <app-feedback-message [message]="kycError()" />
+      <app-feedback-message [message]="kycNotice()" variant="success" />
+      <p class="api-limitation">Licence document details are accepted by this service. The current API does not accept image file contents.</p>
+      <form [formGroup]="kycForm" (ngSubmit)="submitKyc()" class="form-grid" novalidate>
+        <label>Document format<select formControlName="documentType"><option value="image/jpeg">JPEG</option><option value="image/png">PNG</option></select></label>
+        <label>File name<input formControlName="fileName" placeholder="licence.jpg" /></label>
+        <label>File size (bytes)<input type="number" formControlName="sizeBytes" min="51200" max="10485760" /></label>
+        <label>Licence number<input formControlName="licenseNumber" autocomplete="off" /></label>
+        <label>Issuing authority<input formControlName="issuer" /></label>
+        <div class="form-action"><button class="button-primary" type="submit" [disabled]="kycBusy()">{{ kycBusy() ? 'Submitting…' : 'Submit for review' }} <span aria-hidden="true">→</span></button></div>
+      </form>
+    </div>
+  </section>
+</section>

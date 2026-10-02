@@ -1,0 +1,30 @@
+<div class="app-frame">
+  <aside class="sidebar" aria-label="Main navigation">
+    <a class="wordmark" routerLink="/dashboard" aria-label="Wayfarer home"><span class="mark">W</span> wayfarer<span class="period">.</span></a>
+    <div class="side-label">YOUR JOURNEY</div>
+    <nav class="primary-nav">
+      <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><span aria-hidden="true">⌂</span> Overview</a>
+      <a routerLink="/explore" routerLinkActive="active"><span aria-hidden="true">⌕</span> Find a car</a>
+      <a routerLink="/profile" routerLinkActive="active"><span aria-hidden="true">◉</span> Your profile</a>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="support-note"><span class="support-dot"></span><span>All systems ready</span></div>
+      <button type="button" class="signout" (click)="signOut()"><span aria-hidden="true">↗</span> Sign out</button>
+    </div>
+  </aside>
+
+  <div class="main-column">
+    <header class="topbar">
+      <span class="breadcrumb">CAR RENTAL <span>/</span> YOUR SPACE</span>
+      <a class="profile-link" routerLink="/profile"><span class="avatar">W</span><span>Account</span></a>
+    </header>
+    <main class="page-content"><router-outlet /></main>
+    <footer class="site-footer"><span>WAYFARER RENTALS</span><span>Made for the miles ahead.</span></footer>
+  </div>
+
+  <nav class="mobile-nav" aria-label="Mobile navigation">
+    <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><span aria-hidden="true">⌂</span>Home</a>
+    <a routerLink="/explore" routerLinkActive="active"><span aria-hidden="true">⌕</span>Explore</a>
+    <a routerLink="/profile" routerLinkActive="active"><span aria-hidden="true">◉</span>Profile</a>
+  </nav>
+</div>
