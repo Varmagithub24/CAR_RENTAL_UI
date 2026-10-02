@@ -11,7 +11,7 @@ npm install
 npm start
 ```
 
-The Angular dev server runs at `http://localhost:4200` and proxies `/api/**` to `http://localhost:8081`. Keep the backend running locally. Production deployments should route `/api/v1` through a same-origin gateway or reverse proxy; do not add access tokens to API URLs.
+The Angular dev server runs at `http://localhost:4200` and calls the backend directly at `http://localhost:8081/api/v1`. The backend must allow the frontend origin (`http://localhost:4200`) through CORS. Production deployments should route `/api/v1` through a same-origin gateway or reverse proxy; do not add access tokens to API URLs.
 
 ## Frontend Routes
 
