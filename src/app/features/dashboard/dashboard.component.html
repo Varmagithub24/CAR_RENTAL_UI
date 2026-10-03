@@ -1,26 +1,101 @@
 <section class="dashboard-page">
-  <div class="welcome-row">
-    <div><div class="eyebrow">YOUR WAYFARER SPACE</div><h1>Good to see you, {{ firstName }}.</h1></div>
-    <a class="text-link" routerLink="/profile">Account settings <span aria-hidden="true">↗</span></a>
+  <div class="dash-head">
+    <div>
+      <p class="section-kicker">Your account overview</p>
+      <h1 class="section-title">Good morning, {{ firstName }}.</h1>
+      <p class="dash-sub">Your next journey is almost here.</p>
+    </div>
+    <a class="btn btn-primary find-car" routerLink="/explore">Find a car
+      <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /><path d="M5 12h10" /></svg>
+    </a>
   </div>
+
   <app-feedback-message [message]="errorMessage()" />
 
-  <section class="journey-hero">
-    <div class="hero-copy">
-      <span class="hero-kicker">A LITTLE MORE OPEN ROAD</span>
-      <h2>Take the<br />long way.</h2>
-      <p>Find a car that fits the trip, then make the day your own.</p>
-      <a class="hero-button" routerLink="/explore">Find your car <span aria-hidden="true">→</span></a>
-    </div>
-    <div class="hero-image" role="img" aria-label="A silver sports car ready for the road"></div>
-    <div class="hero-index"><span>01</span> / FIND A RIDE</div>
-  </section>
+  <div class="dash-grid">
+    <section class="featured-booking">
+      <div class="featured-art" role="img" aria-label="A premium car ready for your next trip"></div>
+      <div class="featured-body">
+        <div class="featured-top">
+          <div>
+            <span class="badge badge-green">Confirmed</span>
+            <h2>Your upcoming trip</h2>
+            <p class="featured-meta">Reserved and ready</p>
+          </div>
+          <p class="featured-countdown">Pickup soon<br /><strong>Get set</strong></p>
+        </div>
+        <div class="featured-dates">
+          <div><span class="label">Pick-up</span><strong>At your scheduled time</strong></div>
+          <div><span class="label">Return</span><strong>Per your booking</strong></div>
+        </div>
+        <a class="btn btn-secondary" routerLink="/explore">Browse cars
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /><path d="M5 12h10" /></svg>
+        </a>
+      </div>
+    </section>
 
-  <div class="section-heading"><div><div class="eyebrow">MADE FOR THE MOMENT</div><h2>Your next trip, made simple.</h2></div></div>
-  <div class="action-grid">
-    <a class="action-tile" routerLink="/explore"><span class="tile-number">01</span><span class="tile-mark" aria-hidden="true">⌕</span><h3>Find availability</h3><p>Search dates and pickup locations to see what's ready.</p><span class="tile-arrow" aria-hidden="true">↗</span></a>
-    <a class="action-tile clay-tile" routerLink="/profile"><span class="tile-number">02</span><span class="tile-mark" aria-hidden="true">◉</span><h3>Get trip-ready</h3><p>Keep your contact details, address and licence status up to date.</p><span class="tile-arrow" aria-hidden="true">↗</span></a>
+    <section class="panel checklist">
+      <div class="checklist-head">
+        <h2>Ready for pickup?</h2>
+        <span class="badge badge-amber">2 actions</span>
+      </div>
+      <ul class="checklist-items">
+        <li>
+          <span class="check-icon done" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="m8 12 3 3 5-6" /></svg>
+          </span>
+          <span class="check-text">Booking confirmed</span>
+        </li>
+        <li>
+          <span class="check-icon done" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="m8 12 3 3 5-6" /></svg>
+          </span>
+          <span class="check-text">Payment completed</span>
+        </li>
+        <li>
+          <span class="check-icon todo" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" /><path d="m9 12 2 2 4-4" /></svg>
+          </span>
+          <span class="check-text">Verify your identity</span>
+        </li>
+        <li>
+          <span class="check-icon todo" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h9l4 4v16H6z" /><path d="M14 2v5h5M9 14l2 2 4-4" /></svg>
+          </span>
+          <span class="check-text">Sign rental agreement</span>
+        </li>
+      </ul>
+    </section>
   </div>
 
-  <div class="dashboard-note"><span class="note-symbol" aria-hidden="true">✳</span><div><strong>Good journeys begin with the details.</strong><p>Check your profile before you book, so your next pickup goes smoothly.</p></div><a routerLink="/profile">Review profile <span aria-hidden="true">→</span></a></div>
+  <div class="action-grid">
+    <a class="panel action-tile" routerLink="/explore">
+      <span class="icon-tile" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 17-2-1v-5l2-2 2-4h10l2 4 2 2v5l-2 1" /><path d="M5 9h14M7 14h.01M17 14h.01M6 17v2M18 17v2" /></svg>
+      </span>
+      <strong>Find a car</strong>
+      <svg class="tile-arrow" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /><path d="M5 12h10" /></svg>
+    </a>
+    <a class="panel action-tile" routerLink="/profile">
+      <span class="icon-tile" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3" /><path d="M3 20a6 6 0 0 1 12 0M16 5a3 3 0 0 1 0 6M17 14a5 5 0 0 1 4 5" /></svg>
+      </span>
+      <strong>Profile</strong>
+      <svg class="tile-arrow" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /><path d="M5 12h10" /></svg>
+    </a>
+    <a class="panel action-tile" routerLink="/profile">
+      <span class="icon-tile" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" /><path d="m9 12 2 2 4-4" /></svg>
+      </span>
+      <strong>Verification</strong>
+      <svg class="tile-arrow" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /><path d="M5 12h10" /></svg>
+    </a>
+    <a class="panel action-tile" routerLink="/explore">
+      <span class="icon-tile" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M16 3v4M8 3v4M3 10h18" /></svg>
+      </span>
+      <strong>Browse dates</strong>
+      <svg class="tile-arrow" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /><path d="M5 12h10" /></svg>
+    </a>
+  </div>
 </section>

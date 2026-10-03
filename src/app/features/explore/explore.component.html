@@ -1,16 +1,61 @@
 <section class="explore-page">
   <header class="page-heading">
-    <div><div class="eyebrow">THE OPEN ROAD STARTS HERE</div><h1>Find your car.</h1><p>Choose when and where. We'll show what's available.</p></div>
-    <span class="heading-stamp">YOUR NEXT<br />GOOD STORY</span>
+    <div>
+      <p class="section-kicker">Find your drive</p>
+      <h1 class="section-title">Cars available for your dates.</h1>
+      <p class="heading-sub">Choose when and where. We'll show what's available.</p>
+    </div>
   </header>
 
-  <form class="search-panel" [formGroup]="form" (ngSubmit)="search()" novalidate>
-    <label class="field location-field"><span>Pick-up location</span><select formControlName="locationId"><option value="loc-1">Central station</option><option value="loc-2">Airport terminal</option></select></label>
-    <label class="field"><span>Pick-up</span><input type="datetime-local" formControlName="start" /></label>
-    <label class="field"><span>Return</span><input type="datetime-local" formControlName="end" /></label>
-    <label class="field"><span>Pricing category</span><select formControlName="vehicleCategory"><option value="economy">Economy</option><option value="compact">Compact</option><option value="sedan">Sedan</option><option value="suv">SUV</option><option value="premium">Premium</option></select></label>
-    <label class="field currency-field"><span>Currency</span><select formControlName="currency"><option value="USD">USD</option><option value="EUR">EUR</option><option value="INR">INR</option></select></label>
-    <button type="submit" class="search-button" [disabled]="busy()">{{ busy() ? 'Searching…' : 'Search cars' }} <span aria-hidden="true">→</span></button>
+  <form class="search-box" [formGroup]="form" (ngSubmit)="search()" novalidate>
+    <label class="search-cell location-cell">
+      <span class="search-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2" /></svg>
+      </span>
+      <span class="search-field">
+        <span class="label">Pick-up location</span>
+        <select formControlName="locationId"><option value="loc-1">Central station</option><option value="loc-2">Airport terminal</option></select>
+      </span>
+    </label>
+    <label class="search-cell">
+      <span class="search-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M16 3v4M8 3v4M3 10h18" /></svg>
+      </span>
+      <span class="search-field">
+        <span class="label">Pick-up</span>
+        <input type="datetime-local" formControlName="start" />
+      </span>
+    </label>
+    <label class="search-cell">
+      <span class="search-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M16 3v4M8 3v4M3 10h18" /></svg>
+      </span>
+      <span class="search-field">
+        <span class="label">Return</span>
+        <input type="datetime-local" formControlName="end" />
+      </span>
+    </label>
+    <label class="search-cell">
+      <span class="search-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 17-2-1v-5l2-2 2-4h10l2 4 2 2v5l-2 1" /><path d="M5 9h14M7 14h.01M17 14h.01M6 17v2M18 17v2" /></svg>
+      </span>
+      <span class="search-field">
+        <span class="label">Pricing category</span>
+        <select formControlName="vehicleCategory"><option value="economy">Economy</option><option value="compact">Compact</option><option value="sedan">Sedan</option><option value="suv">SUV</option><option value="premium">Premium</option></select>
+      </span>
+    </label>
+    <label class="search-cell currency-cell">
+      <span class="search-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 10h18M7 15h2" /></svg>
+      </span>
+      <span class="search-field">
+        <span class="label">Currency</span>
+        <select formControlName="currency"><option value="USD">USD</option><option value="EUR">EUR</option><option value="INR">INR</option></select>
+      </span>
+    </label>
+    <button type="submit" class="btn btn-primary search-submit" [disabled]="busy()">{{ busy() ? 'Searching…' : 'Search cars' }}
+      <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /><path d="M5 12h10" /></svg>
+    </button>
   </form>
   <app-feedback-message [message]="errorMessage()" />
 
@@ -18,26 +63,68 @@
     <div class="loading-state" role="status"><span class="loader"></span><span>Checking availability…</span></div>
   } @else if (results(); as result) {
     <section class="results-section" aria-live="polite">
-      <div class="results-heading"><div><div class="eyebrow">YOUR SEARCH</div><h2>{{ result.availableVehicleIds.length }} {{ result.availableVehicleIds.length === 1 ? 'option' : 'options' }} for your dates</h2></div><span>{{ result.locationId === 'loc-1' ? 'Central station' : 'Airport terminal' }}</span></div>
+      <div class="results-heading">
+        <div>
+          <p class="section-kicker">Your search</p>
+          <h2>{{ result.availableVehicleIds.length }} {{ result.availableVehicleIds.length === 1 ? 'option' : 'options' }} for your dates</h2>
+        </div>
+        <span class="badge badge-slate">{{ result.locationId === 'loc-1' ? 'Central station' : 'Airport terminal' }}</span>
+      </div>
       @if (result.availableVehicleIds.length === 0) {
-        <div class="empty-state"><span class="empty-mark" aria-hidden="true">—</span><h3>No cars for these dates.</h3><p>Try another time or pickup location to see what's available.</p></div>
+        <div class="empty-state">
+          <span class="empty-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 17-2-1v-5l2-2 2-4h10l2 4 2 2v5l-2 1" /><path d="M5 9h14M6 17v2M18 17v2" /></svg>
+          </span>
+          <h3>No cars for these dates.</h3>
+          <p>Try another time or pickup location to see what's available.</p>
+        </div>
       } @else {
-        <div class="vehicle-list">
+        <div class="car-grid">
           @for (vehicleId of result.availableVehicleIds; track vehicleId; let index = $index) {
-            <article class="vehicle-row">
-              <div class="vehicle-art" [class.art-two]="index % 2 === 1"><span aria-hidden="true">✳</span></div>
-              <div class="vehicle-info"><span class="availability-tag"><i></i> AVAILABLE</span><h3>Available car {{ index + 1 }}</h3><p>Available for your selected dates.</p></div>
-              <div class="vehicle-action"><button type="button" (click)="reserve(vehicleId)" [disabled]="!!bookingVehicle()">{{ bookingVehicle() === vehicleId ? 'Reserving…' : 'Reserve' }} <span aria-hidden="true">→</span></button></div>
+            <article class="car-card">
+              <div class="car-art" [class.art-alt]="index % 2 === 1" role="img" aria-label="Available car">
+                <svg viewBox="0 0 24 24" width="54" height="54" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 17-2-1v-5l2-2 2-4h10l2 4 2 2v5l-2 1" /><path d="M5 9h14M7 14h.01M17 14h.01M6 17v2M18 17v2" /></svg>
+              </div>
+              <div class="car-body">
+                <p class="car-kicker">Available now</p>
+                <h3>Available car {{ index + 1 }}</h3>
+                <div class="car-specs">
+                  <span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3" /><path d="M3 20a6 6 0 0 1 12 0M16 5a3 3 0 0 1 0 6M17 14a5 5 0 0 1 4 5" /></svg> 5 seats</span>
+                  <span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19a9 9 0 1 1 16 0" /><path d="m12 13 4-4M8 19h8" /></svg> Auto</span>
+                  <span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v17M3 21h14M7 6h6v5H7z" /><path d="m15 7 3 3v6a2 2 0 0 0 4 0V9l-2-2" /></svg> Petrol</span>
+                </div>
+                <div class="car-footer">
+                  <div class="car-price"><span class="price-amount">$—</span><span class="price-unit"> / day</span></div>
+                  <button type="button" class="btn btn-primary" (click)="reserve(vehicleId)" [disabled]="!!bookingVehicle()">{{ bookingVehicle() === vehicleId ? 'Reserving…' : 'Reserve' }}
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /><path d="M5 12h10" /></svg>
+                  </button>
+                </div>
+              </div>
             </article>
           }
         </div>
       }
     </section>
   } @else if (searchFailed()) {
-    <div class="empty-state"><span class="empty-mark" aria-hidden="true">!</span><h3>Search could not be completed.</h3><p>Try again when the service is available.</p><button type="button" class="search-button retry-button" (click)="search()">Try again <span aria-hidden="true">→</span></button></div>
+    <div class="empty-state">
+      <span class="empty-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" /><path d="M12 9v4M12 17h.01" /></svg>
+      </span>
+      <h3>Search could not be completed.</h3>
+      <p>Try again when the service is available.</p>
+      <button type="button" class="btn btn-primary retry-button" (click)="search()">Try again
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /><path d="M5 12h10" /></svg>
+      </button>
+    </div>
   } @else if (hasSearched()) {
     <div class="empty-state"><span class="loader"></span><p>Availability will appear here.</p></div>
   } @else {
-    <section class="search-prompt"><div class="prompt-mark" aria-hidden="true">⌕</div><h2>Where are you headed?</h2><p>Choose a pickup point and dates to see available cars.</p></section>
+    <section class="search-prompt">
+      <span class="prompt-mark icon-tile" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2" /></svg>
+      </span>
+      <h2>Where are you headed?</h2>
+      <p>Choose a pickup point and dates to see available cars.</p>
+    </section>
   }
 </section>

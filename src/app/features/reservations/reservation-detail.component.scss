@@ -1,26 +1,49 @@
-.reservation-page { display: grid; gap: 24px; max-width: 850px; margin: 0 auto; }
-.back-link { width: max-content; color: var(--moss-dark); text-decoration: none; font-size: 12px; font-weight: 700; }
-.back-link span { padding-right: 7px; font-size: 17px; }
-.reservation-head { display: flex; align-items: end; justify-content: space-between; }
-.eyebrow, .small-label { color: var(--coral-dark); font-size: 9px; font-weight: 700; letter-spacing: 1.1px; }
-.reservation-head h1, .unavailable-state h1 { margin: 8px 0 0; font: 600 32px var(--font-display); }
-.status-badge { padding: 7px 10px; background: #f8eedc; color: #875d23; font-size: 9px; font-weight: 700; letter-spacing: .7px; }
-.status-badge.confirmed { background: #e7f0e7; color: #3f704b; }
-.trip-sheet { border: 1px solid var(--line); background: #fff; box-shadow: var(--depth-card); }
-.trip-sheet-top { display: flex; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--line); color: #7a847b; font-size: 9px; font-weight: 700; letter-spacing: .8px; }
-.trip-car { display: flex; align-items: center; gap: 15px; padding: 28px 22px; }
-.car-mark { display: grid; width: 48px; height: 48px; place-items: center; background: #e9efe7; color: var(--moss); font-size: 22px; }
-.trip-car h2 { margin: 4px 0 0; font: 600 20px var(--font-display); }
-.trip-dates { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 22px; padding: 23px 22px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.trip-dates div { display: grid; gap: 7px; }
-.trip-dates strong { color: var(--ink); font-size: 12px; font-weight: 600; }
-.route-line { color: #95a18f; }
-.trip-actions { display: flex; align-items: center; gap: 16px; padding: 20px 22px; }
-.confirm-button { display: inline-flex; min-height: 43px; align-items: center; justify-content: space-between; gap: 20px; padding: 0 14px; border: 0; border-radius: 4px; background: var(--moss-dark); color: white; text-decoration: none; font: 600 12px var(--font-body); cursor: pointer; }
-.confirm-button span { font-size: 18px; }
-.confirm-button:disabled { opacity: .6; cursor: wait; }
-.cancel-button { min-height: 40px; padding: 0 12px; border: 1px solid #e0d2ca; border-radius: 4px; background: transparent; color: #96564b; font: 600 11px var(--font-body); cursor: pointer; }
-.cancelled-copy { margin: 0; color: #68756b; font-size: 12px; }
-.unavailable-state { max-width: 520px; padding: 45px 0; }
-.unavailable-state p { max-width: 470px; margin: 12px 0 22px; color: var(--muted); font-size: 13px; line-height: 1.6; }
-@media (max-width: 550px) { .trip-dates { grid-template-columns: 1fr; gap: 16px; } .route-line { display: none; } .trip-sheet-top { gap: 12px; font-size: 8px; } .trip-actions { flex-wrap: wrap; } }
+.reservation-page { display: grid; gap: 1.5rem; max-width: 56rem; margin: 0 auto; }
+
+.back-link { display: inline-flex; align-items: center; gap: .5rem; width: max-content; color: var(--color-slate-500); text-decoration: none; font-size: .875rem; font-weight: 700; }
+.back-link:hover { color: var(--color-slate-950); }
+
+.reservation-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; }
+.status-badge { text-transform: capitalize; }
+.status-badge.confirmed { background: var(--color-emerald-50); color: var(--color-emerald-700); }
+
+.trip-sheet { padding: 0; overflow: hidden; }
+.trip-car { display: flex; align-items: center; gap: 1rem; padding: 1.5rem; }
+.car-mark { display: grid; place-items: center; width: 3.5rem; height: 3.5rem; border-radius: .75rem; background: var(--color-blue-50); color: var(--color-blue-600); }
+.trip-car h2 { margin: .25rem 0 0; font: 800 1.25rem var(--font-sans); color: var(--color-slate-950); }
+.trip-dates { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1.25rem; padding: 1.25rem 1.5rem; border-top: 1px solid var(--color-slate-100); }
+.trip-dates > div { display: grid; gap: .375rem; }
+.trip-dates strong { color: var(--color-slate-950); font-size: .875rem; font-weight: 700; }
+.route-line { color: var(--color-slate-400); display: grid; place-items: center; }
+
+.trip-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+.payment-summary h2, .timeline h2 { margin: 0 0 1.25rem; font: 800 1.125rem var(--font-sans); color: var(--color-slate-950); }
+.summary-rows { display: grid; gap: .75rem; font-size: .875rem; }
+.summary-rows div { display: flex; justify-content: space-between; }
+.summary-rows span { color: var(--color-slate-500); }
+.summary-rows strong { color: var(--color-slate-950); }
+.summary-total { display: flex; align-items: center; justify-content: space-between; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--color-slate-200); }
+.summary-total p { margin: .125rem 0 0; color: var(--color-slate-400); font-size: .75rem; }
+.total-amount { font: 900 1.5rem var(--font-sans); color: var(--color-slate-950); }
+.deposit-note { display: flex; justify-content: space-between; margin-top: 1rem; padding: .875rem 1rem; border-radius: .75rem; background: var(--color-blue-50); color: var(--color-blue-700-text); font-size: .875rem; font-weight: 700; }
+
+.timeline-list { list-style: none; display: grid; gap: 1.25rem; margin: 0; padding: 0; }
+.timeline-list li { display: flex; gap: .75rem; }
+.timeline-list .dot { margin-top: .3125rem; width: .75rem; height: .75rem; flex-shrink: 0; border-radius: 9999px; background: var(--color-amber-600); }
+.timeline-list .dot.done { background: var(--color-emerald-600); }
+.timeline-list strong { font-size: .875rem; color: var(--color-slate-950); }
+.timeline-list p { margin: .125rem 0 0; color: var(--color-slate-400); font-size: .75rem; }
+
+.trip-actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.trip-actions .btn { text-decoration: none; }
+.cancelled-copy { margin: 0; color: var(--color-slate-500); font-size: .875rem; }
+
+.unavailable-state { max-width: 34rem; padding: 2.5rem 0; }
+.unavailable-copy { max-width: 30rem; margin: .75rem 0 1.5rem; color: var(--color-slate-500); font-size: .9375rem; line-height: 1.6; }
+.unavailable-state .btn { text-decoration: none; }
+
+@media (max-width: 640px) {
+  .trip-columns { grid-template-columns: 1fr; }
+  .trip-dates { grid-template-columns: 1fr; }
+  .route-line { transform: rotate(90deg); justify-self: start; }
+}
