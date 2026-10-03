@@ -1,6 +1,11 @@
 <div class="app-frame">
   <aside class="sidebar" aria-label="Main navigation">
-    <a class="wordmark" routerLink="/dashboard" aria-label="Wayfarer home"><span class="mark">W</span> wayfarer<span class="period">.</span></a>
+    <a class="wordmark" routerLink="/dashboard" aria-label="DRIVE home">
+      <span class="logo-tile">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z" /></svg>
+      </span>
+      <span class="brand">DRIVE</span>
+    </a>
     <div class="side-label">YOUR JOURNEY</div>
     <nav class="primary-nav">
       <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><span aria-hidden="true">⌂</span> Overview</a>
@@ -15,11 +20,11 @@
 
   <div class="main-column">
     <header class="topbar">
-      <span class="breadcrumb">CAR RENTAL <span>/</span> YOUR SPACE</span>
-      <a class="profile-link" routerLink="/profile"><span class="avatar">W</span><span>Account</span></a>
+      <span class="breadcrumb">DRIVE <span>/</span> YOUR SPACE</span>
+      <a class="profile-link" routerLink="/profile"><span class="avatar">D</span><span>Account</span></a>
     </header>
     <main class="page-content"><router-outlet /></main>
-    <footer class="site-footer"><span>WAYFARER RENTALS</span><span>Made for the miles ahead.</span></footer>
+    <footer class="site-footer"><span>DRIVE RENTALS</span><span>Premium cars for every mile.</span></footer>
   </div>
 
   <nav class="mobile-nav" aria-label="Mobile navigation">
