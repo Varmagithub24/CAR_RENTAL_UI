@@ -8,18 +8,17 @@ import { RouterLink } from '@angular/router';
   template: `
     <main class="system-page">
       <span class="system-code">{{ code() }}</span>
-      <h1>{{ title() }}</h1>
+      <h1 class="section-title">{{ title() }}</h1>
       <p>{{ message() }}</p>
-      <a routerLink="/dashboard">Back to overview <span aria-hidden="true">→</span></a>
+      <a class="btn btn-primary" routerLink="/dashboard">Back to overview <span aria-hidden="true">→</span></a>
     </main>
   `,
   styles: `
-    .system-page { display: grid; min-height: 50vh; align-content: center; justify-items: start; max-width: 560px; margin: 0 auto; }
-    .system-code { color: var(--coral-dark); font-size: 11px; font-weight: 700; letter-spacing: 1.2px; }
-    h1 { margin: 12px 0; font: 600 38px/1.1 var(--font-display); }
-    p { margin: 0 0 22px; color: var(--muted); line-height: 1.6; }
-    a { color: var(--moss-dark); font-weight: 700; text-decoration: none; }
-    a span { padding-left: 7px; font-size: 18px; }
+    .system-page { display: grid; min-height: 60vh; align-content: center; justify-items: center; text-align: center; gap: .5rem; max-width: 560px; margin: 0 auto; padding: 0 1.5rem; }
+    .system-code { font: 800 12px var(--font-sans); text-transform: uppercase; letter-spacing: .18em; color: var(--color-blue-600); }
+    h1 { margin: .5rem 0; }
+    p { margin: 0 0 1.5rem; color: var(--color-slate-500); line-height: 1.6; }
+    a span { font-size: 18px; }
   `,
 })
 export class SystemPageComponent {

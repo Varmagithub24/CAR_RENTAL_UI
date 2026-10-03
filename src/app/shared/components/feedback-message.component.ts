@@ -11,10 +11,10 @@ import { Component, input } from '@angular/core';
     }
   `,
   styles: `
-    .feedback { margin: 0; padding: 12px 14px; border: 1px solid; border-radius: 6px; font-size: 14px; line-height: 1.5; }
-    .error { color: #8c2f25; background: #fff1ec; border-color: #f1c0b3; }
-    .success { color: #235a43; background: #edf7f0; border-color: #bad8c3; }
-    .info { color: #36514a; background: #eef3ed; border-color: #d3dfd4; }
+    .feedback { margin: 0; padding: 12px 14px; border: 1px solid; border-radius: .75rem; font-size: 14px; font-weight: 600; line-height: 1.5; }
+    .error { color: #be123c; background: #fff1f2; border-color: #fecdd3; }
+    .success { color: #047857; background: #ecfdf5; border-color: #a7f3d0; }
+    .info { color: #1d4ed8; background: #eff6ff; border-color: #bfdbfe; }
   `,
 })
 export class FeedbackMessageComponent {

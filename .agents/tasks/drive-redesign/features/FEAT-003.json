@@ -1,0 +1,25 @@
+{
+  "id": "FEAT-003",
+  "type": "feat",
+  "description": "Restyle the three auth screens (sign-in, register, verify-email templates) and their shared auth-pages.component.scss to the DRIVE SignIn/Register/Verify look. Depends on FEAT-001 (global .field/.field-label/.btn/.section-kicker/.icon-tile/.logo-tile). The three auth component .ts files must NOT change. Independent of FEAT-002/FEAT-004.",
+  "status": "pending",
+  "steps": [
+    "src/app/features/auth/sign-in.component.html: build the DRIVE two-column split. Left: DRIVE .logo-tile + wordmark, .section-kicker 'Welcome back', black heading, email + password inputs using global .field/.field-label, primary button, 'Create an account' link. Right: full-bleed car photo with slate-950 gradient overlay + testimonial (static). PRESERVE EXACTLY: [formGroup]=\"form\", (ngSubmit)=\"submit()\", formControlName=\"email\", formControlName=\"password\", both @if (form.controls.*.invalid && .touched) <small> blocks, [disabled]=\"busy()\" with {{ busy() ? 'Signing in…' : 'Sign in' }}, <app-feedback-message [message]=\"errorMessage()\" />, routerLink=\"/register\", routerLink=\"/verify-email\", and all id/for/autocomplete/inputmode/aria attributes.",
+    "src/app/features/auth/register.component.html: centered card on slate-50, DRIVE logo, .section-kicker 'Join Drive', heading, two-column .field grid, create-account button, sign-in link. PRESERVE EXACTLY: [formGroup]=\"form\", (ngSubmit)=\"submit()\", formControlNames firstName/lastName/email/password/confirmPassword, every @if validation <small> block (including the confirmPassword mismatch one), the @if (!successMessage()) / @else branch with (click)=\"goToSignIn()\", both <app-feedback-message> tags (error default + success variant), routerLink=\"/sign-in\", routerLink=\"/verify-email\".",
+    "src/app/features/auth/verify-email.component.html: centered small card, blue-50 .icon-tile, kicker, heading 'Check your email.', body, primary + ghost buttons. PRESERVE EXACTLY: [formGroup]=\"profile\" + (ngSubmit)=\"confirm()\" (firstName/lastName), [formGroup]=\"request\" + (ngSubmit)=\"resend()\" (email), the @if (confirmed()) / @else if (hasToken()) / @else control-flow branches, (click)=\"requestNewLink()\", all [disabled]=\"busy()\" buttons with dynamic labels, both <app-feedback-message> tags, routerLink=\"/sign-in\".",
+    "Replace every 'Wayfarer'/'wayfarer.' brand mark across the three templates with the DRIVE lightning tile + wordmark.",
+    "src/app/features/auth/auth-pages.component.scss: rewrite to DRIVE. Two-column grid for sign-in (left form panel, right image with slate-950 gradient overlay + testimonial), collapsing to form-only at the existing @media (max-width:780px). Card/panel styling for register/verify on a slate-50 page. Use Manrope, blue-600 primary, slate-200 borders. Keep the file under the 8kB component-style budget (lean on the global helper classes rather than duplicating them)."
+  ],
+  "acceptance_criteria": [
+    "All formControlName, [formGroup], (ngSubmit), (click), @if validation blocks, control-flow branches, feedback-message tags, dynamic button labels, and routerLinks across the three templates are preserved exactly.",
+    "No 'Wayfarer'/'wayfarer' brand text remains in the auth screens; DRIVE branding is present.",
+    "The three auth .ts files are unchanged.",
+    "npm run build succeeds (auth-pages.component.scss < 8kB) and npm test -- --watch=false passes."
+  ],
+  "verification": [
+    "Run 'npm run build' and confirm success with no budget error on auth-pages.component.scss.",
+    "Run 'npm test -- --watch=false' and confirm all specs pass."
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}

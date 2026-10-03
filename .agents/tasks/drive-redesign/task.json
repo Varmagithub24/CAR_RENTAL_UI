@@ -1,0 +1,7 @@
+{
+  "task_id": "task-drive-redesign",
+  "task_description": "Visual-only redesign of the Angular 22 car-rental UI to match the DRIVE Figma design (blue/slate/Manrope). Preserve ALL Angular logic, bindings, reactive forms, signals, routerLinks, handlers, selectors, and input() APIs exactly; change only SCSS and template markup/classes. No new dependencies, routes, or components; no Tailwind.",
+  "status": "pending",
+  "feature_order": ["FEAT-001", "FEAT-002", "FEAT-003", "FEAT-004"],
+  "blocked_reason": null
+}

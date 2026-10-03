@@ -1,0 +1,24 @@
+{
+  "id": "FEAT-002",
+  "type": "feat",
+  "description": "Rebrand and restyle the authenticated app shell (src/app/layout/app-shell.component.html + .scss) from Wayfarer to DRIVE: lightning-tile + DRIVE wordmark, slate-950 active-pill navigation, restyled topbar/breadcrumb/avatar/footer/sign-out. Depends on FEAT-001 (uses global tokens + .logo-tile). app-shell.component.ts must NOT change.",
+  "status": "pending",
+  "steps": [
+    "In src/app/layout/app-shell.component.html replace the '<span class=\"mark\">W</span> wayfarer<span class=\"period\">.</span>' wordmark with a .logo-tile containing an inline SVG lightning bolt (viewBox 0 0 24 24, fill currentColor) + an extrabold 'DRIVE' wordmark. Keep routerLink=\"/dashboard\" and update aria-label to 'DRIVE home'.",
+    "Keep the three primary-nav links EXACTLY: routerLink=\"/dashboard\" with routerLinkActive=\"active\" and [routerLinkActiveOptions]=\"{ exact: true }\", routerLink=\"/explore\" with routerLinkActive=\"active\", routerLink=\"/profile\" with routerLinkActive=\"active\". Keep the three mobile-nav links with the same routerLink/active bindings. Only change labels/markup/classes for styling, not the routes.",
+    "Keep the sign-out button's (click)=\"signOut()\" and the <router-outlet /> element unchanged. Keep the profile-link routerLink=\"/profile\". Rebrand the breadcrumb text and footer text to DRIVE (e.g. 'DRIVE RENTALS'). Keep every aria-label on nav/landmarks.",
+    "In src/app/layout/app-shell.component.scss restyle to DRIVE: white sidebar with slate-200 border; nav idle links slate-600; hover slate-100; active link a slate-950 pill (bg slate-950, white text, rounded-xl); topbar breadcrumb slate-400 uppercase tracked; avatar a slate-950 circle with white initials; footer slate-500 on white; sign-out ghost style. Preserve the responsive @media (max-width:760px) behaviour (hide sidebar, show mobile-nav) and the .logo-tile sizing. Keep the file under the 8kB component-style budget."
+  ],
+  "acceptance_criteria": [
+    "The shell shows a DRIVE lightning tile + 'DRIVE' wordmark and no 'Wayfarer'/'wayfarer' text remains.",
+    "All routerLink, routerLinkActive, [routerLinkActiveOptions], (click)=\"signOut()\", and <router-outlet /> bindings are byte-for-byte preserved.",
+    "app-shell.component.ts is unchanged.",
+    "npm run build succeeds (app-shell SCSS < 8kB) and npm test -- --watch=false passes (app.spec still finds router-outlet)."
+  ],
+  "verification": [
+    "Run 'npm run build' and confirm success with no budget error on app-shell.component.scss.",
+    "Run 'npm test -- --watch=false' and confirm the app spec (router-outlet render) and all others pass."
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}
