@@ -29,12 +29,21 @@ export class ProfileComponent {
   protected readonly profileBusy = signal(false);
   protected readonly addressBusy = signal(false);
   protected readonly kycBusy = signal(false);
+  protected readonly maxDateOfBirth = new Date().toISOString().slice(0, 10);
+
+  protected get initials(): string {
+    const current = this.profile();
+    const first = current?.firstName?.trim().charAt(0) ?? '';
+    const last = current?.lastName?.trim().charAt(0) ?? '';
+    return `${first}${last}`.toLocaleUpperCase() || 'U';
+  }
 
   protected readonly profileForm = this.formBuilder.nonNullable.group({
     firstName: ['', [Validators.required, Validators.maxLength(80)]],
     lastName: ['', [Validators.required, Validators.maxLength(80)]],
     email: ['', [Validators.email, Validators.maxLength(254)]],
     phone: ['', [Validators.maxLength(30)]],
+    dateOfBirth: [''],
     preferredLanguage: ['en', Validators.maxLength(10)],
   });
 
@@ -50,9 +59,9 @@ export class ProfileComponent {
   });
 
   protected readonly kycForm = this.formBuilder.nonNullable.group({
-    documentType: ['image/jpeg', Validators.required],
+    documentType: ['', Validators.required],
     fileName: ['', [Validators.required, Validators.maxLength(180)]],
-    sizeBytes: [128_000, [Validators.required, Validators.min(51_200), Validators.max(10_485_760)]],
+    sizeBytes: ['', [Validators.required, Validators.min(51_200), Validators.max(10_485_760)]],
     licenseNumber: ['', [Validators.required, Validators.maxLength(80)]],
     issuer: ['', [Validators.required, Validators.maxLength(100)]],
   });
@@ -69,9 +78,11 @@ export class ProfileComponent {
     this.profileBusy.set(true);
     this.profileError.set(null);
     this.profileNotice.set(null);
-    this.api.updateProfile(this.profileForm.getRawValue()).subscribe({
+    const formValue = this.profileForm.getRawValue();
+    this.api.updateProfile({ ...formValue, dateOfBirth: formValue.dateOfBirth || null }).subscribe({
       next: (profile) => {
         this.profile.set(profile);
+        this.profileForm.patchValue({ dateOfBirth: profile.dateOfBirth ?? '' });
         this.profileNotice.set('Your profile has been updated.');
       },
       error: (error: unknown) => this.profileError.set(this.errors.message(error)),
@@ -102,7 +113,8 @@ export class ProfileComponent {
     this.kycBusy.set(true);
     this.kycError.set(null);
     this.kycNotice.set(null);
-    this.api.submitKyc(this.kycForm.getRawValue()).subscribe({
+    const formValue = this.kycForm.getRawValue();
+    this.api.submitKyc({ ...formValue, sizeBytes: Number(formValue.sizeBytes) }).subscribe({
       next: (record) => {
         this.kyc.set(record);
         this.kycNotice.set('Your licence details have been submitted for review.');
@@ -120,6 +132,7 @@ export class ProfileComponent {
           ...profile,
           email: profile.email ?? '',
           phone: profile.phone ?? '',
+          dateOfBirth: profile.dateOfBirth ?? '',
         });
       },
       error: (error: unknown) => this.profileError.set(this.errors.message(error)),

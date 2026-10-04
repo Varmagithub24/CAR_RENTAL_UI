@@ -18,6 +18,7 @@ export interface UserProfile {
   lastName: string;
   email: string | null;
   phone: string | null;
+  dateOfBirth: string | null;
   preferredLanguage: string;
 }
 
